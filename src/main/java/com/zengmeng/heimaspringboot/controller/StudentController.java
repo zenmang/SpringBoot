@@ -13,10 +13,10 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @GetMapping("/student/{id}")
+/*    @GetMapping("/student/{id}")
     public Response<StudentDTO> getStudentById(@PathVariable long id){
         return Response.success(studentService.getStudentById(id));
-    }
+    }*/
 
     @PostMapping("/student")
     public Response<Long> addStudent(@RequestBody StudentDTO studentDTO){
@@ -32,5 +32,10 @@ public class StudentController {
     @PutMapping("/student/{id}")
     public Response<StudentDTO> updateStudentById(@PathVariable long id, @RequestParam(required = false) String name, @RequestParam(required = false) String email){
         return Response.success(studentService.updateStudentById(id,name,email));
+    }
+
+    @GetMapping("/student/{id}")
+    public Response<StudentDTO> getUserByIdd(@PathVariable long id){
+        return Response.success(studentService.getStudentByIdd(id));
     }
 }

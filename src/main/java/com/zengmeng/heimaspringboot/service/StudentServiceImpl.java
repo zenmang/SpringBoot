@@ -3,6 +3,7 @@ package com.zengmeng.heimaspringboot.service;
 import com.zengmeng.heimaspringboot.dao.StudentRepository;
 import com.zengmeng.heimaspringboot.dto.StudentDTO;
 import com.zengmeng.heimaspringboot.entity.Student;
+import com.zengmeng.heimaspringboot.mapper.StudentMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class StudentServiceImpl implements StudentService{
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private StudentMapper studentMapper;
 
     @Override
     public StudentDTO getStudentById(long id) {
@@ -56,6 +60,14 @@ public class StudentServiceImpl implements StudentService{
             student.setEmail(email);
         }
         Student save = studentRepository.save(student);
+        StudentDTO studentDTO  = new StudentDTO();
+        BeanUtils.copyProperties(student, studentDTO);
+        return studentDTO;
+    }
+
+    @Override
+    public StudentDTO getStudentByIdd(long id) {
+        Student student = studentMapper.getUserByIdd(id);
         StudentDTO studentDTO  = new StudentDTO();
         BeanUtils.copyProperties(student, studentDTO);
         return studentDTO;

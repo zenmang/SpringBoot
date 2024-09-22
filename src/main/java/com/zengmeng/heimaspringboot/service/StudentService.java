@@ -11,4 +11,6 @@ public interface StudentService {
     void deleteStudentById(long id);
 
     StudentDTO updateStudentById(long id, String name, String email);
+
+    public StudentDTO getStudentByIdd(long id);
 }
